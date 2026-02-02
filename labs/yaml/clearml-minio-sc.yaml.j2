@@ -1,0 +1,14 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-files
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: {{ NFS_IP }}
+  share: /srv/clearml-files
+mountOptions:
+  - nconnect=8
+  - nfsvers=4.1
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
